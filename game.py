@@ -3,6 +3,12 @@
 # Include pygame which we got from pip
 import pygame
 
+# bring in the math module so we can use absolute value
+from math import fabs
+
+# Get the random module
+from random import randint
+
 # in order to use pygame, we have to run the init method
 # 2. Init pygame
 pygame.init()
@@ -31,7 +37,14 @@ keys_down = {
 hero = {
 	"x": 100,
 	"y": 100,
-	"speed": 10
+	"speed": 10,
+	"wins": 0
+}
+
+goblin = {
+	"x": 200,
+	"y": 200,
+	"speed": 10	
 }
 
 screen_size = (screen["height"], screen["width"])
@@ -39,7 +52,8 @@ pygame_screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Goblin Chase")
 background_image = pygame.image.load('./images/background.png')
 hero_image = pygame.image.load('./images/hero.png')
-hero_image_scaled = pygame.transform.scale(hero_image, (99,96));
+hero_image_scaled = pygame.transform.scale(hero_image, (32,32))
+goblin_image = pygame.image.load('images/goblin.png')
 
 
 
@@ -92,6 +106,20 @@ while game_on:
 	elif keys_down['right']:
 		hero['x'] += hero['speed']
 
+	# COLLISION DETECTION!!
+	distance_between = fabs(hero['x'] - goblin['x']) + fabs(hero['y'] - goblin['y'])
+	if (distance_between < 32):
+		# the hero and goblin are touching!
+		# print ("Collision!!")
+		# Generate a random X > 0, X < screen['width']
+		# Generate a random Y > 0, Y < screen['height']
+		rand_x = randint(0,screen['width'])
+		rand_y = randint(0,screen['height'])
+		goblin['x'] = rand_x
+		goblin['y'] = rand_y
+		# Update the hero's wins
+		hero['wins'] += 1
+
 
 	# ---RENDER!---
 	# blit takes 2 arguments
@@ -100,8 +128,14 @@ while game_on:
 	# Screen.fill (pass bg_color)
 	pygame_screen.blit(background_image, [0,0])
 
+	# Draw the hero wins on the screen
+	font = pygame.font.Font(None, 25)
+	wins_text = font.render("Wins: %d" % (hero['wins']), True, (0,0,0))
+	pygame_screen.blit(wins_text, [40,40])
+
 	# draw the hero
 	pygame_screen.blit(hero_image_scaled, [hero['x'],hero['y']])
+	pygame_screen.blit(goblin_image, [goblin['x'],goblin['y']])
 
 	# clear the screen for next time
 	pygame.display.flip()
