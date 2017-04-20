@@ -39,6 +39,10 @@ pygame_screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Goblin Chase")
 background_image = pygame.image.load('./images/background.png')
 hero_image = pygame.image.load('./images/hero.png')
+hero_image_scaled = pygame.transform.scale(hero_image, (99,96));
+
+
+
 
 # /////////////////////////////////////////////
 # //////////////MAIN GAME LOOP/////////////////
@@ -97,7 +101,7 @@ while game_on:
 	pygame_screen.blit(background_image, [0,0])
 
 	# draw the hero
-	pygame_screen.blit(hero_image, [hero['x'],hero['y']])
+	pygame_screen.blit(hero_image_scaled, [hero['x'],hero['y']])
 
 	# clear the screen for next time
 	pygame.display.flip()
