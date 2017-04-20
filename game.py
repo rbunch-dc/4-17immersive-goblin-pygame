@@ -21,10 +21,17 @@ keys = {
 	"down": 274
 }
 
+keys_down = {
+	"right": False,
+	"left": False,
+	"up": False,
+	"down": False,
+}
+
 hero = {
 	"x": 100,
 	"y": 100,
-	"speed": 20
+	"speed": 10
 }
 
 screen_size = (screen["height"], screen["width"])
@@ -50,15 +57,36 @@ while game_on:
 			# update our boolean, so pygame can escape the loop
 		elif event.type == pygame.KEYDOWN:
 			if event.key == keys['up']:
-				hero['y'] -= hero['speed']
+				keys_down['up'] = True
 			elif event.key == keys['down']:
-				hero['y'] += hero['speed']
+				keys_down['down'] = True
 			elif event.key == keys['left']:
 				# print "User pressed left!"
-				hero['x'] -= hero['speed']
+				keys_down['left'] = True
 			elif event.key == keys['right']:
 				# print "User pressed right!"
-				hero['x'] += hero['speed']
+				keys_down['right'] = True
+		elif event.type == pygame.KEYUP:
+			# print "The user let go of a key"
+			if event.key == keys['up']:
+				# the user let go of a key... and that key was the up arrow
+				keys_down['up'] = False
+			if event.key == keys['down']:
+				keys_down['down'] = False
+			if event.key == keys['left']:
+				keys_down['left'] = False
+			if event.key == keys['right']:
+				keys_down['right'] = False
+
+	# Update Hero position
+	if keys_down['up']:
+		hero['y'] -= hero['speed']
+	elif keys_down['down']:
+		hero['y'] += hero['speed']
+	if keys_down['left']:
+		hero['x'] -= hero['speed']
+	elif keys_down['right']:
+		hero['x'] += hero['speed']
 
 
 	# ---RENDER!---
