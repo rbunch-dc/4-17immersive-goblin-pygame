@@ -45,7 +45,8 @@ hero = {
 goblin = {
 	"x": 200,
 	"y": 200,
-	"speed": 5,
+	"speed_x": 5,
+	"speed_y": 5,
 	"direction": "N"
 }
 
@@ -141,39 +142,50 @@ while game_on:
 		# update goblin position
 		# get random direction (up down left or right)
 		# move goblin in that direction
-		if (goblin['direction'] == 'N'):
-			goblin['y'] -= goblin['speed']
-		elif (goblin['direction'] == 'S'):
-			goblin['y'] += goblin['speed']
-		elif (goblin['direction'] == 'E'):
-			goblin['x'] += goblin['speed']
-		elif (goblin['direction'] == 'W'):
-			goblin['x'] -= goblin['speed']
-		elif (goblin['direction'] == 'NE'):
-			goblin['y'] -= goblin['speed']
-			goblin['x'] += goblin['speed']
-		elif (goblin['direction'] == 'NW'):
-			goblin['y'] -= goblin['speed']
-			goblin['x'] -= goblin['speed']
-		elif (goblin['direction'] == 'SE'):
-			goblin['y'] += goblin['speed']
-			goblin['x'] += goblin['speed']
-		elif (goblin['direction'] == 'SW'):
-			goblin['y'] += goblin['speed']
-			goblin['x'] -= goblin['speed']
+		# if (goblin['direction'] == 'N'):
+		# 	goblin['y'] -= goblin['speed']
+		# elif (goblin['direction'] == 'S'):
+		# 	goblin['y'] += goblin['speed']
+		# elif (goblin['direction'] == 'E'):
+		# 	goblin['x'] += goblin['speed']
+		# elif (goblin['direction'] == 'W'):
+		# 	goblin['x'] -= goblin['speed']
+		# elif (goblin['direction'] == 'NE'):
+		# 	goblin['y'] -= goblin['speed']
+		# 	goblin['x'] += goblin['speed']
+		# elif (goblin['direction'] == 'NW'):
+		# 	goblin['y'] -= goblin['speed']
+		# 	goblin['x'] -= goblin['speed']
+		# elif (goblin['direction'] == 'SE'):
+		# 	goblin['y'] += goblin['speed']
+		# 	goblin['x'] += goblin['speed']
+		# elif (goblin['direction'] == 'SW'):
+		# 	goblin['y'] += goblin['speed']
+		# 	goblin['x'] -= goblin['speed']
+
+	goblin['x'] += goblin['speed_x']
+	goblin['y'] += goblin['speed_y']
+
+	if (goblin['x'] > screen['width']) or (goblin['x'] < 0):
+		goblin['speed_x'] = -goblin['speed_x']
+	if (goblin['y'] > screen['height']) or (goblin['y'] < 0):
+		goblin['speed_y'] = -goblin['speed_y']
+
 
 	if (tick % 20 == 0):
-		new_dir_index = randint(0, len(directions)-1)
-		goblin['direction'] = directions[new_dir_index]
+		# new_dir_index = randint(0, len(directions)-1)
+		# goblin['direction'] = directions[new_dir_index]
+		goblin['speed_x'] += randint(-2,3)
+		goblin['speed_y'] += randint(-2,3)
 
-	if (goblin['x'] > screen['width']):
-		goblin['x'] = 0
-	elif (goblin['x'] < 0):
-		goblin['x'] = screen['width']
-	if (goblin['y'] > screen['height']):
-		goblin['y'] = 0
-	elif (goblin['y'] < 0):
-		goblin['y'] = screen['height']
+	# if (goblin['x'] > screen['width']):
+	# 	goblin['x'] = 0
+	# elif (goblin['x'] < 0):
+	# 	goblin['x'] = screen['width']
+	# if (goblin['y'] > screen['height']):
+	# 	goblin['y'] = 0
+	# elif (goblin['y'] < 0):
+	# 	goblin['y'] = screen['height']
 
 
 
