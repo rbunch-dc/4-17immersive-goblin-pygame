@@ -84,6 +84,13 @@ timer = 0
 # //////////////MAIN GAME LOOP/////////////////
 # /////////////////////////////////////////////	x
 game_on = True
+
+def draw_text():
+	font = pygame.font.Font(None, 25)
+	wins_text = font.render("Wins: %d" % (hero['wins']), True, (0,0,0))
+	pygame_screen.blit(wins_text, [40,40])
+	
+
 # Create the game loop (while 1)
 while game_on:
 	# update our ticker each time through the loop ~30/sec
@@ -223,9 +230,7 @@ while game_on:
 	pygame_screen.blit(background_image, [0,0])
 
 	# Draw the hero wins on the screen
-	font = pygame.font.Font(None, 25)
-	wins_text = font.render("Wins: %d" % (hero['wins']), True, (0,0,0))
-	pygame_screen.blit(wins_text, [40,40])
+	draw_text()
 
 	if (tick % 30 == 0):
 		timer += 1
