@@ -1,3 +1,5 @@
+# This is the refactored version with functions
+
 
 # 1. Include pygame
 # Include pygame which we got from pip
@@ -89,7 +91,7 @@ def draw_text():
 	font = pygame.font.Font(None, 25)
 	wins_text = font.render("Wins: %d" % (hero['wins']), True, (0,0,0))
 	pygame_screen.blit(wins_text, [40,40])
-	
+
 
 # Create the game loop (while 1)
 while game_on:
