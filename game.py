@@ -233,6 +233,7 @@ while game_on:
 
 	# Draw the hero wins on the screen
 	draw_text()
+	font = pygame.font.Font(None, 25)
 
 	if (tick % 30 == 0):
 		timer += 1
